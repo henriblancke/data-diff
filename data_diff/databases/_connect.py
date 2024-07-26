@@ -24,6 +24,7 @@ from data_diff.databases.clickhouse import Clickhouse
 from data_diff.databases.vertica import Vertica
 from data_diff.databases.duckdb import DuckDB
 from data_diff.databases.mssql import MsSQL
+from data_diff.databases.athena import Athena
 
 
 @attrs.frozen
@@ -90,6 +91,7 @@ DATABASE_BY_SCHEME = {
     "clickhouse": Clickhouse,
     "vertica": Vertica,
     "mssql": MsSQL,
+    "athena": Athena,
 }
 
 
@@ -134,6 +136,7 @@ class Connect:
         - clickhouse
         - vertica
         - duckdb
+        - athena
         """
 
         dsn = dsnparse.parse(db_uri)

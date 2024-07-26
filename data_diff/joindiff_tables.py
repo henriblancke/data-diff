@@ -8,7 +8,7 @@ from itertools import chain
 
 import attrs
 
-from data_diff.databases import Database, MsSQL, MySQL, BigQuery, Presto, Oracle, Snowflake, DuckDB
+from data_diff.databases import Database, MsSQL, MySQL, BigQuery, Presto, Oracle, Snowflake, DuckDB, Athena
 from data_diff.abcs.database_types import NumericType, DbPath
 from data_diff.databases.base import Compiler
 from data_diff.queries.api import (
@@ -59,7 +59,7 @@ def create_temp_table(c: Compiler, path: TablePath, expr: Expr) -> str:
     c: Compiler = attrs.evolve(c, root=False)  # we're compiling fragments, not full queries
     if isinstance(db, BigQuery):
         return f"create table {c.dialect.compile(c, path)} OPTIONS(expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)) as {c.dialect.compile(c, expr)}"
-    elif isinstance(db, Presto):
+    elif isinstance(db, Presto) or isinstance(db, Athena):
         return f"create table {c.dialect.compile(c, path)} as {c.dialect.compile(c, expr)}"
     elif isinstance(db, Oracle):
         return f"create global temporary table {c.dialect.compile(c, path)} as {c.dialect.compile(c, expr)}"

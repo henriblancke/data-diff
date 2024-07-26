@@ -426,6 +426,15 @@ class DbtParser:
                 "dbname": credentials.get("dbname") or credentials.get("database"),
             }
             self.threads = credentials.get("threads")
+        elif conn_type == "athena":
+            conn_info = {
+                "driver": conn_type,
+                "region_name": credentials.get("region_name"),
+                "aws_profile_name": credentials.get("aws_profile_name"),
+                "s3_staging_dir": credentials.get("s3_staging_dir"),
+                "work_group": credentials.get("work_group"),
+            }
+            self.threads = credentials.get("threads")
         else:
             raise DataDiffDbtConnectionNotImplementedError(f"Provider {conn_type} is not yet supported for dbt diffs")
 

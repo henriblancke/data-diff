@@ -22,7 +22,7 @@ classifiers = [
 packages = [{ include = "data_diff" }]
 [tool.poetry.dependencies]
 pydantic = ">=1.10.12"
-python = ">=3.8.0,<4.0"
+python = ">=3.8.1,<4.0"
 dsnparse = "<0.2.0"
 click = ">=8.1"
 rich = "*"
@@ -67,6 +67,7 @@ ruff = ">=0.1.4"
 
 [tool.poetry.extras]
 # When adding, update also: README + dev deps just above
+athena = ["pyathena"]
 preql = ["preql"]
 mysql = ["mysql-connector-python"]
 postgresql = ["psycopg2"]
@@ -82,7 +83,7 @@ vertica = ["vertica-python"]
 duckdb = ["duckdb"]
 all-dbs = [
     "preql", "mysql-connector-python", "psycopg2", "snowflake-connector-python", "cryptography", "presto-python-client",
-    "oracledb", "pyodbc", "trino", "clickhouse-driver", "vertica-python", "duckdb"
+    "oracledb", "pyodbc", "trino", "clickhouse-driver", "vertica-python", "duckdb", "pyathena"
 ]
 
 [tool.poetry.group.dev.dependencies]
